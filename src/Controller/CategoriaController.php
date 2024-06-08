@@ -6,6 +6,7 @@ use App\DAO\CategoriaDAO;
 use App\Http\Request;
 use App\Http\RequestValidateCategoriaController;
 use App\Http\Response;
+use App\Model\Categoria;
 
 class CategoriaController{
     public function addCategoria(){
@@ -14,8 +15,9 @@ class CategoriaController{
 
             RequestValidateCategoriaController::validateControllerCategoria($body, "addCategoria");
             
+            $categoria = new Categoria(null, $body["categoria"]);
             $categoriaDao = new CategoriaDAO;
-            $respostaAoUsuario = $categoriaDao->addCategoria($body);
+            $respostaAoUsuario = $categoriaDao->addCategoria($categoria);
             
             Response::responseMessage([
                 "sucess" => true,

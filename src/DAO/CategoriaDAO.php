@@ -3,18 +3,20 @@
 namespace App\DAO;
 
 use App\Db\DbConn;
+use App\Model\Categoria;
 use Exception;
 
 class CategoriaDAO{
 
-    public function addCategoria($body){
+    public function addCategoria(Categoria $categoria){
         try {
             $conn = DbConn::coon();
 
             $sql = "INSERT INTO categoria (nameCategoria) VALUES (:nameCategoria)";
 
+            $teste = $categoria->getNameCategoria();
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':nameCategoria', $body["categoria"]);
+            $stmt->bindParam(':nameCategoria', $teste);
             $stmt->execute();
 
             return "Sucesso ao adicionar a categoria!";

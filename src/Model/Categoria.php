@@ -3,7 +3,7 @@
 namespace App\Model;
 
 class Categoria{
-    private int $id;
+    private ?int $id;
     private string $nameCategoria;
 
     public function __construct(int $id = null, string $nameCategoria)
