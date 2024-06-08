@@ -8,6 +8,7 @@ use App\Http\RequestValidateProductController;
 use App\Http\Response;
 
 require_once __DIR__ . "/../Utils/functionContrucaoModelProductAddProduct.php";
+require_once __DIR__ . "/../Utils/functionContrucaoModelProductUpdateProduct.php";
 
 class ProductController{
 
@@ -78,8 +79,29 @@ class ProductController{
     }
 
     public function updateProduct($id){
-        echo "Update Product";
-        print_r($id);
+        try {
+            $body = Request::body();
+
+            RequestValidateProductController::validateControllerProduct($body, "updateProduct");
+            $body["preco"] = intval($body["preco"] * 100);
+            $product = contrucaoModelProductUpdateProduct($body);
+            
+            $productDAO = new ProductDAO();
+            $respostaAoUsuario = $productDAO->updateProduct($id[0], $product);
+            
+            Response::responseMessage([
+                "sucess" => true,
+                "failed" => false,
+                "Message" => $respostaAoUsuario
+            ], 200);
+
+        } catch (\Exception $e) {
+            Response::responseMessage([
+                "sucess" => false,
+                "failed" => true,
+                "error" => $e->getMessage(),
+            ], $e->getCode());
+        }
     }
 
     public function listAllProduct(){

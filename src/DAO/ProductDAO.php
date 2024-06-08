@@ -116,10 +116,11 @@ class ProductDAO
 
             $stmt->execute();
 
-            if ($stmt->rowCount() == 0) throw new Exception("Id não encontrado para atualização");
+            if ($stmt->rowCount() == 0) throw new Exception("Não foi possível indentificar o produto");
 
-            return true;
+            return "Sucesso ao atualizar o produto";
         } catch (\PDOException $e) {
+            if($e->getCode() == 23000) throw new Exception("Erro idCategoria ou idFabricante Invalidos!", 404);
             throw new Exception($e->getMessage(), 500);
         } catch (\Exception $e) {
             throw new Exception($e->getMessage(), 404);
