@@ -1,4 +1,3 @@
-
 <?php
 
 function retornarDadosApiProducts()
@@ -16,3 +15,5 @@ function retornarDadosApiProducts()
        throw new Exception("Não foi possivel carregas os dados da Api de Produtos", 400);
     }
 }
+
+?>

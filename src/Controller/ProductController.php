@@ -107,6 +107,7 @@ class ProductController{
 
     public function listAllProduct(){
         try {
+            
             $productDAO = new ProductDAO();
             $respostaAoUsuario = $productDAO->listAllProduct();
             
@@ -127,6 +128,7 @@ class ProductController{
 
     public function consumirApi(){
         try {
+            
             $data = retornarDadosApiProducts();
             $productDao = new ProductDAO();
             for($ind = 0; $ind < count($data); $ind++){

@@ -26,7 +26,10 @@ class ProductDAO
 
             if ($stmt->rowCount() == 0) throw new Exception("Não foi possível indentificar o produto");
 
-            return $stmt->fetch(\PDO::FETCH_ASSOC);
+            $result =  $stmt->fetch(\PDO::FETCH_ASSOC);
+            $result["pathImagem"] = base64_decode($result["pathImagem"] );
+
+            return $result;
         } catch (\PDOException $e) {
             throw new Exception($e->getMessage(), 500);
         } catch (\Exception $e) {
@@ -47,12 +50,13 @@ class ProductDAO
             $stmt = $coon->prepare($sql);
 
             $estoque = 0;
+            $imageUrl = base64_encode($product->getPathImagem());
 
             $stmt->bindValue(':titulo', $product->getTitulo());
             $stmt->bindValue(':descricao', $product->getDescricao());
             $stmt->bindValue(':preco', $product->getPreco());
             $stmt->bindValue(':estoque', $estoque);
-            $stmt->bindValue(':pathImagem', $product->getPathImagem());
+            $stmt->bindValue(':pathImagem', $imageUrl);
             $stmt->bindValue(':idCategoria', $product->getIdCategoria());
             $stmt->bindValue(':idFabricante', $product->getIdFabricante());
 
@@ -143,8 +147,14 @@ class ProductDAO
             $stmt = $coon->prepare($sql);
             $stmt->execute();
 
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
             if ($stmt->rowCount() == 0) throw new Exception("Nenhum produto cadastrado!");
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            for ($ind=0; $ind < count($result); $ind++) { 
+                $result[$ind]["pathImagem"] = base64_decode($result[$ind]["pathImagem"] );
+            }
+
+            return $result;
         } catch (\PDOException $e) {
             throw new Exception($e->getMessage(), 500);
         } catch (\Exception $e) {

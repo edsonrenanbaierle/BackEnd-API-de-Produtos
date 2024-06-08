@@ -41,3 +41,4 @@ use App\Model\Product;
              1
          );
      }
+?>
