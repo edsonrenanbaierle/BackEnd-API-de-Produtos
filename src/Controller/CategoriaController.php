@@ -53,4 +53,24 @@ class CategoriaController{
             ], $e->getCode());
         }
     }
+
+    public function getAllCategoria($id){
+        try {   
+            $categoriaDao = new CategoriaDAO;
+            $respostaAoUsuario = $categoriaDao->getAllCategoria();
+            
+            Response::responseMessage([
+                "sucess" => true,
+                "failed" => false,
+                "data" => $respostaAoUsuario
+            ], 200);
+
+        } catch (\Exception $e) {
+            Response::responseMessage([
+                "sucess" => false,
+                "failed" => true,
+                "error" => $e->getMessage(),
+            ], $e->getCode());
+        }
+    }
 }

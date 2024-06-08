@@ -52,4 +52,23 @@ class CategoriaDAO{
             $conn = null;
         }
     }
+
+    public function getAllCategoria(){
+        try {
+            $conn = DbConn::coon();
+
+            $sql = "SELECT * FROM categoria";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            throw new \Exception($e->getMessage(), 500);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage(), 404);
+        } finally {
+            $conn = null;
+        }
+    }
 }
