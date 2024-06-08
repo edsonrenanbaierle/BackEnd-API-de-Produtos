@@ -24,7 +24,7 @@ class ProductDAO
             $stmt->bindParam(':idProduto', $idProduct);
             $stmt->execute();
 
-            if ($stmt->rowCount() == 0) return false;
+            if ($stmt->rowCount() == 0) throw new Exception("Não foi possível indentificar o produto");
 
             return $stmt->fetch(\PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {

@@ -12,8 +12,23 @@ require_once __DIR__ . "/../Utils/functionContrucaoModelProductAddProduct.php";
 class ProductController{
 
     public function getProduct($id){
-        echo "get Product";
-        print_r($id);
+        try {
+            $productDAO = new ProductDAO();
+            $respostaAoUsuario = $productDAO->getProduct($id[0]);
+            
+            Response::responseMessage([
+                "sucess" => true,
+                "failed" => false,
+                "data" => $respostaAoUsuario
+            ], 200);
+
+        } catch (\Exception $e) {
+            Response::responseMessage([
+                "sucess" => false,
+                "failed" => true,
+                "error" => $e->getMessage(),
+            ], $e->getCode());
+        }
     }
 
     public function addProduct(){
