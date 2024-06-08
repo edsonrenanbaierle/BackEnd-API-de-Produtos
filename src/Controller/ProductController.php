@@ -7,8 +7,7 @@ use App\Http\Request;
 use App\Http\RequestValidateProductController;
 use App\Http\Response;
 
-require_once __DIR__ . "/../Utils/functionContrucaoModelProductAddProduct.php";
-require_once __DIR__ . "/../Utils/functionContrucaoModelProductUpdateProduct.php";
+require_once __DIR__ . "/../Utils/functionContrucaoModelProduct.php";
 
 class ProductController{
 
@@ -105,7 +104,23 @@ class ProductController{
     }
 
     public function listAllProduct(){
-        echo "List All Product";
+        try {
+            $productDAO = new ProductDAO();
+            $respostaAoUsuario = $productDAO->listAllProduct();
+            
+            Response::responseMessage([
+                "sucess" => true,
+                "failed" => false,
+                "data" => $respostaAoUsuario
+            ], 200);
+
+        } catch (\Exception $e) {
+            Response::responseMessage([
+                "sucess" => false,
+                "failed" => true,
+                "error" => $e->getMessage(),
+            ], $e->getCode());
+        }
     }
 
     public function consumirApi(){

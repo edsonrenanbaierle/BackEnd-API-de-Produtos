@@ -144,8 +144,7 @@ class ProductDAO
             $stmt->execute();
 
             if ($stmt->rowCount() == 0) throw new Exception("Nenhum produto cadastrado!");
-
-            return $stmt->fetch(\PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
             throw new Exception($e->getMessage(), 500);
         } catch (\Exception $e) {
