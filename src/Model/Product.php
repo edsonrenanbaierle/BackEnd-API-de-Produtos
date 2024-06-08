@@ -11,8 +11,9 @@ class Product{
     private int $idCategoria;
     private int $idFabricante;
 
-    public function __construct(string $titulo, string $descricao, int $preco, int $estoque, string $pathImagem, int $idCategoria, int $idFabricante)
+    public function __construct(int $idProduto = null, string $titulo, string $descricao, int $preco, int $estoque, string $pathImagem, int $idCategoria, int $idFabricante)
     {
+        $this->idProduto = $idProduto;
         $this->titulo = $titulo;
         $this->descricao = $descricao;
         $this->preco = $preco;
@@ -27,7 +28,7 @@ class Product{
         return $this->idProduto;
     }
 
-    public function setIdProduto($idProduto)
+    private function setIdProduto($idProduto)
     {
         $this->idProduto = $idProduto;
     }
@@ -37,7 +38,7 @@ class Product{
         return $this->titulo;
     }
 
-    public function setTitulo($titulo)
+    private function setTitulo($titulo)
     {
         $this->titulo = $titulo;
     }
@@ -47,7 +48,7 @@ class Product{
         return $this->descricao;
     }
 
-    public function setDescricao($descricao)
+    private function setDescricao($descricao)
     {
         $this->descricao = $descricao;
 
@@ -58,7 +59,7 @@ class Product{
         return $this->preco;
     }
 
-    public function setPreco($preco)
+    private function setPreco($preco)
     {
         $this->preco = $preco;
 
@@ -69,7 +70,7 @@ class Product{
         return $this->estoque;
     }
 
-    public function setEstoque($estoque)
+    private function setEstoque($estoque)
     {
         $this->estoque = $estoque;
     }
@@ -79,7 +80,7 @@ class Product{
         return $this->pathImagem;
     }
 
-    public function setPathImagem($pathImagem)
+    private function setPathImagem($pathImagem)
     {
         $this->pathImagem = $pathImagem;
 
@@ -90,7 +91,7 @@ class Product{
         return $this->idCategoria;
     }
 
-    public function setIdCategoria($idCategoria)
+    private function setIdCategoria($idCategoria)
     {
         $this->idCategoria = $idCategoria;
     }
@@ -100,7 +101,7 @@ class Product{
         return $this->idFabricante;
     }
 
-    public function setIdFabricante($idFabricante)
+    private function setIdFabricante($idFabricante)
     {
         $this->idFabricante = $idFabricante;
     }

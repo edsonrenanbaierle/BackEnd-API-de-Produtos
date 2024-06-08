@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class FabricanteModel{
+class Fabricante{
     private int $idFabricante;
     private string $nomeFantasia;
     private string $cidade;
@@ -10,13 +10,14 @@ class FabricanteModel{
     private string $pais;
     private string $cnpj;
 
-    public function __construct(string $nomeFantasia, string $cidade, string $estado, string $pais, string $cnpj)
+    public function __construct(int $idFabricante = null, string $nomeFantasia, string $cidade, string $estado, string $pais, string $cnpj)
     {
+        $this->idFabricante = $idFabricante;
         $this->nomeFantasia = $nomeFantasia;
-        $this->nomeFantasia = $cidade;
-        $this->nomeFantasia = $estado;
-        $this->nomeFantasia = $pais;
-        $this->nomeFantasia = $cnpj;
+        $this->cidade = $cidade;
+        $this->estado = $estado;
+        $this->pais = $pais;
+        $this->cnpj = $cnpj;
     }
 
     public function getIdFabricante()
@@ -24,7 +25,7 @@ class FabricanteModel{
         return $this->idFabricante;
     }
 
-    public function setIdFabricante($idFabricante)
+    private function setIdFabricante($idFabricante)
     {
         $this->idFabricante = $idFabricante;
     }
@@ -34,7 +35,7 @@ class FabricanteModel{
         return $this->nomeFantasia;
     }
 
-    public function setNomeFantasia($nomeFantasia)
+    private function setNomeFantasia($nomeFantasia)
     {
         $this->nomeFantasia = $nomeFantasia;
     }
@@ -44,7 +45,7 @@ class FabricanteModel{
         return $this->cidade;
     }
 
-    public function setCidade($cidade)
+    private function setCidade($cidade)
     {
         $this->cidade = $cidade;
     }
@@ -54,7 +55,7 @@ class FabricanteModel{
         return $this->estado;
     }
 
-    public function setEstado($estado)
+    private function setEstado($estado)
     {
         $this->estado = $estado;
     }
@@ -64,7 +65,7 @@ class FabricanteModel{
         return $this->pais;
     }
 
-    public function setPais($pais)
+    private function setPais($pais)
     {
         $this->pais = $pais;
     }
@@ -74,7 +75,7 @@ class FabricanteModel{
         return $this->cnpj;
     }
  
-    public function setCnpj($cnpj)
+    private function setCnpj($cnpj)
     {
         $this->cnpj = $cnpj;
     }
