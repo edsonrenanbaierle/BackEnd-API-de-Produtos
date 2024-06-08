@@ -27,3 +27,17 @@ use App\Model\Product;
              $body["idFabricante"]
          );
      }
+
+     function contrucaoModelProductApi($body){
+        $price = intval($body->price * 100);
+        return new Product(
+             null, 
+             $body->title,
+             $body->description,
+             $price,
+             0,
+             $body->image,
+             1,
+             1
+         );
+     }

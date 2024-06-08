@@ -6,5 +6,5 @@ $routes = [
     "PUT/product/{id}"      => "ProductController@updateProduct",
     "GET/product/{id}"      => "ProductController@getProduct",
     "GET/listAllProduct"    => "ProductController@listAllProduct",
-    "GET/consumirApi"       => "ProductController@consumirApi",
+    "POST/consumirApi"       => "ProductController@consumirApi",
 ];

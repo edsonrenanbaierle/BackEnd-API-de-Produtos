@@ -6,8 +6,10 @@ use App\DAO\ProductDAO;
 use App\Http\Request;
 use App\Http\RequestValidateProductController;
 use App\Http\Response;
+use App\Model\Product;
 
 require_once __DIR__ . "/../Utils/functionContrucaoModelProduct.php";
+require_once __DIR__ . "/../Utils/functionRetornarDadosApiProducts.php";
 
 class ProductController{
 
@@ -124,6 +126,26 @@ class ProductController{
     }
 
     public function consumirApi(){
-        echo "consumir Product";
+        try {
+            $data = retornarDadosApiProducts();
+            $productDao = new ProductDAO();
+            for($ind = 0; $ind < count($data); $ind++){
+                $product = contrucaoModelProductApi($data[$ind]);
+                $productDao->addProduct($product);
+            }
+            
+            Response::responseMessage([
+                "sucess" => true,
+                "failed" => false,
+                "data" => "Sucesso ao cadastrar os produtos"
+            ], 200);
+
+        } catch (\Exception $e) {
+            Response::responseMessage([
+                "sucess" => false,
+                "failed" => true,
+                "error" => $e->getMessage(),
+            ], $e->getCode());
+        }
     }
 }
