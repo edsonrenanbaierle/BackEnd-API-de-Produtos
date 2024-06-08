@@ -58,8 +58,9 @@ class ProductDAO
 
             $stmt->execute();
 
-            return true;
+            return "Sucesso ao cadastrar o Produto";
         } catch (\PDOException $e) {
+            if($e->getCode() == 23000) throw new Exception("Erro idCategoria ou idFabricante Invalidos!", 404);
             throw new Exception($e->getMessage(), 500);
         } catch (\Exception $e) {
             throw new Exception($e->getMessage(), 404);

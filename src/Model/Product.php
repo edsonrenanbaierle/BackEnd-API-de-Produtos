@@ -2,7 +2,7 @@
 namespace App\Model;
 
 class Product{
-    private int $idProduto;
+    private ?int $idProduto;
     private string $titulo;
     private string $descricao;
     private int $preco;

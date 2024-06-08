@@ -1,12 +1,12 @@
 CREATE DATABASE desafio3product;
 
 CREATE TABLE categoria (
-    idCategoria INT PRIMARY KEY,
+    idCategoria INT PRIMARY KEY AUTO_INCREMENT,
     nameCategoria VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE fabricante (
-    idFabricante INT PRIMARY KEY,
+    idFabricante INT PRIMARY KEY AUTO_INCREMENT,
     nomeFantasia VARCHAR(255) NOT NULL,
     cidade VARCHAR(255) NOT NULL,
     estado VARCHAR(255) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE fabricante (
 );
 
 CREATE TABLE produto (
-    idProduto INT PRIMARY KEY,
+    idProduto INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(255) NOT NULL,
     descricao TEXT,
     preco INT NOT NULL,
