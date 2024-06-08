@@ -81,9 +81,9 @@ class ProductDAO
             $stmt->bindParam(':idProduto', $id);
             $stmt->execute();
 
-            if ($stmt->rowCount() == 0) throw new Exception("Id não encontrado para remoção");
+            if ($stmt->rowCount() == 0) throw new Exception("Não foi possivel encontrar o produto para remoção");
 
-            return true;
+            return "Sucesso ao remover o produto!";
         } catch (\PDOException $e) {
             throw new Exception($e->getMessage(), 500);
         } catch (\Exception $e) {

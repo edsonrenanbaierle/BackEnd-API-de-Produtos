@@ -22,6 +22,7 @@ class DbConn
                 ["error" => "Erro ao conectar-se ao banco de dados"],
                 404
             );
+            exit;
         }
     }
 }

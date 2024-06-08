@@ -58,8 +58,23 @@ class ProductController{
     }
 
     public function removeProduct($id){
-        echo "remove Product";
-        print_r($id);
+        try {
+            $productDAO = new ProductDAO();
+            $respostaAoUsuario = $productDAO->removeProduct($id[0]);
+            
+            Response::responseMessage([
+                "sucess" => true,
+                "failed" => false,
+                "message" => $respostaAoUsuario
+            ], 200);
+
+        } catch (\Exception $e) {
+            Response::responseMessage([
+                "sucess" => false,
+                "failed" => true,
+                "error" => $e->getMessage(),
+            ], $e->getCode());
+        }
     }
 
     public function updateProduct($id){
