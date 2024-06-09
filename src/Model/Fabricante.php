@@ -3,7 +3,7 @@
 namespace App\Model;
 
 class Fabricante{
-    private int $idFabricante;
+    private ?int $idFabricante;
     private string $nomeFantasia;
     private string $cidade;
     private string $estado;

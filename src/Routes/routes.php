@@ -9,5 +9,7 @@ $routes = [
     "POST/consumirApi"       => "ProductController@consumirApi",
     "GET/AllCategoria"       => "CategoriaController@getAllCategoria",
     "POST/categoria"       => "CategoriaController@addCategoria",
-    "DELETE/categoria/{id}"       => "CategoriaController@removeCategoria"
+    "DELETE/categoria/{id}"       => "CategoriaController@removeCategoria",
+    "POST/fabricante"       => "FabricanteController@addFabricante",
+    "DELETE/fabricante/{id}"       => "FabricanteController@removeFabricante"
 ];

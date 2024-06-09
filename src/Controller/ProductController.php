@@ -10,6 +10,7 @@ use App\Model\Product;
 
 require_once __DIR__ . "/../Utils/functionContrucaoModelProduct.php";
 require_once __DIR__ . "/../Utils/functionRetornarDadosApiProducts.php";
+require_once __DIR__ . "/../Utils/functionCriacaoImageReturnNewPath.php";
 
 class ProductController{
 
@@ -39,7 +40,8 @@ class ProductController{
 
             RequestValidateProductController::validateControllerProduct($body, "addProduct");
             $body["preco"] = intval($body["preco"] * 100);
-            $product = contrucaoModelProductAddProduct($body);
+            //$caminhoUrlImagem = criacaoImageReturnNewPath($body);
+            $product = contrucaoModelProductAddProduct($body, null);
             
             $productDAO = new ProductDAO();
             $respostaAoUsuario = $productDAO->addProduct($product);

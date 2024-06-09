@@ -15,7 +15,7 @@ use App\Model\Product;
         );
     }
 
-    function contrucaoModelProductAddProduct($body){
+    function contrucaoModelProductAddProduct($body, $caminhoImgUrl){
         return new Product(
              null, 
              $body["titulo"],
