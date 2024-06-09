@@ -1,13 +1,15 @@
-<?php 
+<?php
 
 namespace App\Http;
 
-class RequestValidateFabricante{
+class RequestValidateFabricante
+{
     private static $dataRequestControllerConfirmation = [
         "addFabricante" => ["nomeFantasia", "cidade", "estado", "pais", "cnpj"]
     ];
 
-    public static function validateControllerFabricante($body, $nameFunctionControlerFabricante){
+    public static function validateControllerFabricante($body, $nameFunctionControlerFabricante)
+    {
         $deveConterPorParametro = self::$dataRequestControllerConfirmation[$nameFunctionControlerFabricante];
         foreach ($deveConterPorParametro as $value) {
             if (!isset($body["$value"])) {
@@ -22,6 +24,6 @@ class RequestValidateFabricante{
 
         if (isset($error["error"])) {
             throw new \Exception($error["error"], 400);
-        } 
+        }
     }
 }

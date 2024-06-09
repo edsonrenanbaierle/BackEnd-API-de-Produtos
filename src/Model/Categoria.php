@@ -2,7 +2,8 @@
 
 namespace App\Model;
 
-class Categoria{
+class Categoria
+{
     private ?int $id;
     private string $nameCategoria;
 
@@ -21,7 +22,7 @@ class Categoria{
     {
         $this->id = $id;
     }
-    
+
     public function getNameCategoria()
     {
         return $this->nameCategoria;
@@ -31,6 +32,4 @@ class Categoria{
     {
         $this->nameCategoria = $nameCategoria;
     }
-
-   
 }

@@ -13,7 +13,7 @@ class FabricanteDAO
             $coon = DbConn::coon();
 
             $nomeFantasia = $fabricante->getNomeFantasia();
-            $cidade =$fabricante->getCidade();
+            $cidade = $fabricante->getCidade();
             $estado = $fabricante->getEstado();
             $pais = $fabricante->getPais();
             $cnpj =  $fabricante->getCnpj();
@@ -30,7 +30,7 @@ class FabricanteDAO
 
             return "Sucesso ao cadastrar fabricante";
         } catch (\PDOException $e) {
-            if($e->getCode() == 23000) throw new \Exception("O Fabricante com o cnpj informado ja conta cadastrado", 500);
+            if ($e->getCode() == 23000) throw new \Exception("O Fabricante com o cnpj informado ja conta cadastrado", 500);
             throw new \Exception($e->getMessage(), 500);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), 404);
@@ -54,7 +54,7 @@ class FabricanteDAO
 
             return "Sucesso ao remover o fabricante";
         } catch (\PDOException $e) {
-            if($e->getCode() == 23000) throw new \Exception("O fabricante informada já esta vinculada a um produto, impossivel a remoção", 500);
+            if ($e->getCode() == 23000) throw new \Exception("O fabricante informada já esta vinculada a um produto, impossivel a remoção", 500);
             throw new \Exception($e->getMessage(), 500);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), 404);

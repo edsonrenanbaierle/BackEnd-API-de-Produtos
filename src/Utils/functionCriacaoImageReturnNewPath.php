@@ -24,7 +24,6 @@ function criacaoImageReturnNewPath($body)
             print_r($pasta . $novoNomeArq . "." . $extensao);
             echo "<br>";
             throw new Exception("Erro ao cadastrar produto, não foi possivel carregar a imagem", 500);
-            
         }
 
         return "src/" . $pasta . $novoNomeArq . "." . $extensao;

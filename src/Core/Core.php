@@ -17,7 +17,7 @@ class Core
         if (isset($_GET["path"])) {
             $url = $url . $_GET["path"];
         }
-        
+
         $rotaEncontrada = false;
         $prefixController = 'App\\Controller\\';
 

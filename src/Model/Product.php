@@ -1,7 +1,9 @@
-<?php 
+<?php
+
 namespace App\Model;
 
-class Product{
+class Product
+{
     private ?int $idProduto;
     private string $titulo;
     private string $descricao;
@@ -51,7 +53,6 @@ class Product{
     private function setDescricao($descricao)
     {
         $this->descricao = $descricao;
-
     }
 
     public function getPreco()
@@ -62,7 +63,6 @@ class Product{
     private function setPreco($preco)
     {
         $this->preco = $preco;
-
     }
 
     public function getEstoque()
@@ -83,7 +83,6 @@ class Product{
     private function setPathImagem($pathImagem)
     {
         $this->pathImagem = $pathImagem;
-
     }
 
     public function getIdCategoria()

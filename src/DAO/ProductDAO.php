@@ -27,7 +27,7 @@ class ProductDAO
             if ($stmt->rowCount() == 0) throw new Exception("Não foi possível indentificar o produto");
 
             $result =  $stmt->fetch(\PDO::FETCH_ASSOC);
-            $result["pathImagem"] = base64_decode($result["pathImagem"] );
+            $result["pathImagem"] = base64_decode($result["pathImagem"]);
 
             return $result;
         } catch (\PDOException $e) {
@@ -64,7 +64,7 @@ class ProductDAO
 
             return "Sucesso ao cadastrar o Produto";
         } catch (\PDOException $e) {
-            if($e->getCode() == 23000) throw new Exception("Erro idCategoria ou idFabricante Invalidos!", 404);
+            if ($e->getCode() == 23000) throw new Exception("Erro idCategoria ou idFabricante Invalidos!", 404);
             throw new Exception($e->getMessage(), 500);
         } catch (\Exception $e) {
             throw new Exception($e->getMessage(), 404);
@@ -124,7 +124,7 @@ class ProductDAO
 
             return "Sucesso ao atualizar o produto";
         } catch (\PDOException $e) {
-            if($e->getCode() == 23000) throw new Exception("Erro idCategoria ou idFabricante Invalidos!", 404);
+            if ($e->getCode() == 23000) throw new Exception("Erro idCategoria ou idFabricante Invalidos!", 404);
             throw new Exception($e->getMessage(), 500);
         } catch (\Exception $e) {
             throw new Exception($e->getMessage(), 404);
@@ -150,8 +150,8 @@ class ProductDAO
             $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($stmt->rowCount() == 0) throw new Exception("Nenhum produto cadastrado!");
-            for ($ind=0; $ind < count($result); $ind++) { 
-                $result[$ind]["pathImagem"] = base64_decode($result[$ind]["pathImagem"] );
+            for ($ind = 0; $ind < count($result); $ind++) {
+                $result[$ind]["pathImagem"] = base64_decode($result[$ind]["pathImagem"]);
             }
 
             return $result;

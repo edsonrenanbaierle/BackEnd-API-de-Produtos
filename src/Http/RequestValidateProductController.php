@@ -1,14 +1,16 @@
-<?php 
+<?php
 
 namespace App\Http;
 
-class RequestValidateProductController{
+class RequestValidateProductController
+{
     private static $dataRequestControllerConfirmation = [
         "addProduct" => ["titulo", "descricao", "preco", "pathImagem", "idCategoria", "idFabricante"],
         "updateProduct" => ["titulo", "descricao", "preco", "estoque", "pathImagem", "idCategoria", "idFabricante"]
     ];
 
-    public static function validateControllerProduct($body, $nameFunctionControlerProduct){
+    public static function validateControllerProduct($body, $nameFunctionControlerProduct)
+    {
         $deveConterPorParametro = self::$dataRequestControllerConfirmation[$nameFunctionControlerProduct];
         foreach ($deveConterPorParametro as $value) {
             if (!isset($body["$value"])) {
@@ -23,6 +25,6 @@ class RequestValidateProductController{
 
         if (isset($error["error"])) {
             throw new \Exception($error["error"], 400);
-        } 
+        }
     }
 }

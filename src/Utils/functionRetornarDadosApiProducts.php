@@ -12,8 +12,6 @@ function retornarDadosApiProducts()
 
         return json_decode($response);
     } catch (\Exception $e) {
-       throw new Exception("Não foi possivel carregas os dados da Api de Produtos", 400);
+        throw new Exception("Não foi possivel carregas os dados da Api de Produtos", 400);
     }
 }
-
-?>

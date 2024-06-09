@@ -1,13 +1,15 @@
-<?php 
+<?php
 
 namespace App\Http;
 
-class RequestValidateCategoriaController{
+class RequestValidateCategoriaController
+{
     private static $dataRequestControllerConfirmation = [
         "addCategoria" => ["categoria"]
     ];
 
-    public static function validateControllerCategoria($body, $nameFunctionControlerProduct){
+    public static function validateControllerCategoria($body, $nameFunctionControlerProduct)
+    {
         $deveConterPorParametro = self::$dataRequestControllerConfirmation[$nameFunctionControlerProduct];
         foreach ($deveConterPorParametro as $value) {
             if (!isset($body["$value"])) {
@@ -22,6 +24,6 @@ class RequestValidateCategoriaController{
 
         if (isset($error["error"])) {
             throw new \Exception($error["error"], 400);
-        } 
+        }
     }
 }

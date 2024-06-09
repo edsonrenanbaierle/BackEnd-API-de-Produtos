@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace App\Model;
 
-class Fabricante{
+class Fabricante
+{
     private ?int $idFabricante;
     private string $nomeFantasia;
     private string $cidade;
@@ -74,7 +75,7 @@ class Fabricante{
     {
         return $this->cnpj;
     }
- 
+
     private function setCnpj($cnpj)
     {
         $this->cnpj = $cnpj;

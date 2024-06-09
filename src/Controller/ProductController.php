@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Controller;
 
@@ -12,19 +12,20 @@ require_once __DIR__ . "/../Utils/functionContrucaoModelProduct.php";
 require_once __DIR__ . "/../Utils/functionRetornarDadosApiProducts.php";
 require_once __DIR__ . "/../Utils/functionCriacaoImageReturnNewPath.php";
 
-class ProductController{
+class ProductController
+{
 
-    public function getProduct($id){
+    public function getProduct($id)
+    {
         try {
             $productDAO = new ProductDAO();
             $respostaAoUsuario = $productDAO->getProduct($id[0]);
-            
+
             Response::responseMessage([
                 "sucess" => true,
                 "failed" => false,
                 "data" => $respostaAoUsuario
             ], 200);
-
         } catch (\Exception $e) {
             Response::responseMessage([
                 "sucess" => false,
@@ -34,7 +35,8 @@ class ProductController{
         }
     }
 
-    public function addProduct(){
+    public function addProduct()
+    {
         try {
             $body = Request::body();
 
@@ -42,16 +44,15 @@ class ProductController{
             $body["preco"] = intval($body["preco"] * 100);
             //$caminhoUrlImagem = criacaoImageReturnNewPath($body);
             $product = contrucaoModelProductAddProduct($body, null);
-            
+
             $productDAO = new ProductDAO();
             $respostaAoUsuario = $productDAO->addProduct($product);
-            
+
             Response::responseMessage([
                 "sucess" => true,
                 "failed" => false,
                 "Message" => $respostaAoUsuario
             ], 200);
-
         } catch (\Exception $e) {
             Response::responseMessage([
                 "sucess" => false,
@@ -61,17 +62,17 @@ class ProductController{
         }
     }
 
-    public function removeProduct($id){
+    public function removeProduct($id)
+    {
         try {
             $productDAO = new ProductDAO();
             $respostaAoUsuario = $productDAO->removeProduct($id[0]);
-            
+
             Response::responseMessage([
                 "sucess" => true,
                 "failed" => false,
                 "message" => $respostaAoUsuario
             ], 200);
-
         } catch (\Exception $e) {
             Response::responseMessage([
                 "sucess" => false,
@@ -81,23 +82,23 @@ class ProductController{
         }
     }
 
-    public function updateProduct($id){
+    public function updateProduct($id)
+    {
         try {
             $body = Request::body();
 
             RequestValidateProductController::validateControllerProduct($body, "updateProduct");
             $body["preco"] = intval($body["preco"] * 100);
             $product = contrucaoModelProductUpdateProduct($body);
-            
+
             $productDAO = new ProductDAO();
             $respostaAoUsuario = $productDAO->updateProduct($id[0], $product);
-            
+
             Response::responseMessage([
                 "sucess" => true,
                 "failed" => false,
                 "Message" => $respostaAoUsuario
             ], 200);
-
         } catch (\Exception $e) {
             Response::responseMessage([
                 "sucess" => false,
@@ -107,18 +108,18 @@ class ProductController{
         }
     }
 
-    public function listAllProduct(){
+    public function listAllProduct()
+    {
         try {
-            
+
             $productDAO = new ProductDAO();
             $respostaAoUsuario = $productDAO->listAllProduct();
-            
+
             Response::responseMessage([
                 "sucess" => true,
                 "failed" => false,
                 "data" => $respostaAoUsuario
             ], 200);
-
         } catch (\Exception $e) {
             Response::responseMessage([
                 "sucess" => false,
@@ -128,22 +129,22 @@ class ProductController{
         }
     }
 
-    public function consumirApi(){
+    public function consumirApi()
+    {
         try {
-            
+
             $data = retornarDadosApiProducts();
             $productDao = new ProductDAO();
-            for($ind = 0; $ind < count($data); $ind++){
+            for ($ind = 0; $ind < count($data); $ind++) {
                 $product = contrucaoModelProductApi($data[$ind]);
                 $productDao->addProduct($product);
             }
-            
+
             Response::responseMessage([
                 "sucess" => true,
                 "failed" => false,
                 "data" => "Sucesso ao cadastrar os produtos"
             ], 200);
-
         } catch (\Exception $e) {
             Response::responseMessage([
                 "sucess" => false,
