@@ -17,7 +17,7 @@ function criacaoImageReturnNewPath($body)
         fwrite($fopenImage, $conteudoDoArquivo);
         fclose($fopenImage);
 
-        return $diretorioCompletoImage;
+        return "/" . $diretorioCompletoImage;
     } catch (\Exception $e) {
         throw new Exception($e->getMessage(), 500);
     }

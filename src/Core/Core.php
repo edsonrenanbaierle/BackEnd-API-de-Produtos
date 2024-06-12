@@ -3,7 +3,6 @@
 namespace App\Core;
 
 use App\Http\Request;
-use App\Http\Response;
 use App\Controller\NaoEncontradoController;
 
 header("Access-Control-Allow-Origin: *");
