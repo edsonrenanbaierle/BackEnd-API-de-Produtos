@@ -27,7 +27,6 @@ class ProductDAO
             if ($stmt->rowCount() == 0) throw new Exception("Não foi possível indentificar o produto");
 
             $result =  $stmt->fetch(\PDO::FETCH_ASSOC);
-            $result["pathImagem"] = base64_decode($result["pathImagem"]);
 
             return $result;
         } catch (\PDOException $e) {
@@ -50,7 +49,7 @@ class ProductDAO
             $stmt = $coon->prepare($sql);
 
             $estoque = 0;
-            $imageUrl = base64_encode($product->getPathImagem());
+            $imageUrl = $product->getPathImagem();
 
             $stmt->bindValue(':titulo', $product->getTitulo());
             $stmt->bindValue(':descricao', $product->getDescricao());
@@ -150,11 +149,34 @@ class ProductDAO
             $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($stmt->rowCount() == 0) throw new Exception("Nenhum produto cadastrado!");
-            for ($ind = 0; $ind < count($result); $ind++) {
-                $result[$ind]["pathImagem"] = base64_decode($result[$ind]["pathImagem"]);
-            }
 
             return $result;
+        } catch (\PDOException $e) {
+            throw new Exception($e->getMessage(), 500);
+        } catch (\Exception $e) {
+            throw new Exception($e->getMessage(), 404);
+        } finally {
+            $coon = null;
+        }
+    }
+
+    public function updateImageProduct($idProduto, $pathImagem)
+    {
+        try {
+            $coon = DbConn::coon();
+
+            $sql = "UPDATE produto
+                    SET pathImagem  = :pathImagem
+                    WHERE idProduto = :idProduto";
+
+            $stmt = $coon->prepare($sql);
+            $stmt->bindParam(":idProduto", $idProduto);
+            $stmt->bindParam(":pathImagem", $pathImagem);
+            $stmt->execute();
+
+            if ($stmt->rowCount() == 0) throw new Exception("Produto não encontrado!");
+
+            return "Imagem atualizada com sucesso";
         } catch (\PDOException $e) {
             throw new Exception($e->getMessage(), 500);
         } catch (\Exception $e) {

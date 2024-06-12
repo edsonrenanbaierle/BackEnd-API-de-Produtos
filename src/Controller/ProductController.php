@@ -42,8 +42,8 @@ class ProductController
 
             RequestValidateProductController::validateControllerProduct($body, "addProduct");
             $body["preco"] = intval($body["preco"] * 100);
-            //$caminhoUrlImagem = criacaoImageReturnNewPath($body);
-            $product = contrucaoModelProductAddProduct($body, null);
+            $caminhoUrlImagem = criacaoImageReturnNewPath($body);
+            $product = contrucaoModelProductAddProduct($body, $caminhoUrlImagem);
 
             $productDAO = new ProductDAO();
             $respostaAoUsuario = $productDAO->addProduct($product);
@@ -89,7 +89,10 @@ class ProductController
 
             RequestValidateProductController::validateControllerProduct($body, "updateProduct");
             $body["preco"] = intval($body["preco"] * 100);
-            $product = contrucaoModelProductUpdateProduct($body);
+
+            $caminhoUrlImagem = criacaoImageReturnNewPath($body);
+
+            $product = contrucaoModelProductUpdateProduct($body, $caminhoUrlImagem);
 
             $productDAO = new ProductDAO();
             $respostaAoUsuario = $productDAO->updateProduct($id[0], $product);
@@ -114,6 +117,32 @@ class ProductController
 
             $productDAO = new ProductDAO();
             $respostaAoUsuario = $productDAO->listAllProduct();
+
+            Response::responseMessage([
+                "sucess" => true,
+                "failed" => false,
+                "data" => $respostaAoUsuario
+            ], 200);
+        } catch (\Exception $e) {
+            Response::responseMessage([
+                "sucess" => false,
+                "failed" => true,
+                "error" => $e->getMessage(),
+            ], $e->getCode());
+        }
+    }
+
+    public function updateImageProduto()
+    {
+        try {
+            $body = Request::body();
+
+            RequestValidateProductController::validateControllerProduct($body, "updateImageProduto");
+
+            $caminhoUrlImagem = criacaoImageReturnNewPath($body);
+
+            $productDAO = new ProductDAO();
+            $respostaAoUsuario = $productDAO->updateImageProduct($body["idProduto"], $caminhoUrlImagem);
 
             Response::responseMessage([
                 "sucess" => true,

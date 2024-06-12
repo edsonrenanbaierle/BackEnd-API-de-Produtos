@@ -5,8 +5,9 @@ namespace App\Http;
 class RequestValidateProductController
 {
     private static $dataRequestControllerConfirmation = [
-        "addProduct" => ["titulo", "descricao", "preco", "pathImagem", "idCategoria", "idFabricante"],
-        "updateProduct" => ["titulo", "descricao", "preco", "estoque", "pathImagem", "idCategoria", "idFabricante"]
+        "addProduct" => ["titulo", "descricao", "preco", "imageBase64", "idCategoria", "idFabricante"],
+        "updateProduct" => ["titulo", "descricao", "preco", "estoque", "imageBase64", "idCategoria", "idFabricante"],
+        "updateImageProduto" => ["idProduto", "imageBase64"]
     ];
 
     public static function validateControllerProduct($body, $nameFunctionControlerProduct)

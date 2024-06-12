@@ -2,7 +2,7 @@
 
 use App\Model\Product;
 
-function contrucaoModelProductUpdateProduct($body)
+function contrucaoModelProductUpdateProduct($body, $caminhoImgUrl)
 {
     return new Product(
         null,
@@ -10,7 +10,7 @@ function contrucaoModelProductUpdateProduct($body)
         $body["descricao"],
         $body["preco"],
         $body["estoque"],
-        $body["pathImagem"],
+        $caminhoImgUrl,
         $body["idCategoria"],
         $body["idFabricante"]
     );
@@ -24,7 +24,7 @@ function contrucaoModelProductAddProduct($body, $caminhoImgUrl)
         $body["descricao"],
         $body["preco"],
         0,
-        $body["pathImagem"],
+        $caminhoImgUrl,
         $body["idCategoria"],
         $body["idFabricante"]
     );
