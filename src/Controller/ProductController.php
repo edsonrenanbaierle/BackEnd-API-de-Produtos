@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DAO\FabricanteDAO;
 use App\DAO\ProductDAO;
 use App\Http\Request;
 use App\Http\RequestValidateProductController;
@@ -19,12 +20,18 @@ class ProductController
     {
         try {
             $productDAO = new ProductDAO();
-            $respostaAoUsuario = $productDAO->getProduct($id[0]);
+            $product = $productDAO->getProduct($id[0]);
+
+            $fabricanteDao = new FabricanteDAO();
+            $dadosDoFabricanteDoProduto = $fabricanteDao->getFabricante($product["idFabricante"]);
+
+            $product["fabricante"] = $dadosDoFabricanteDoProduto;
+            unset($product["idFabricante"]);
 
             Response::responseMessage([
                 "sucess" => true,
                 "failed" => false,
-                "data" => $respostaAoUsuario
+                "data" => $product
             ], 200);
         } catch (\Exception $e) {
             Response::responseMessage([

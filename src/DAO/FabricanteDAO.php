@@ -4,6 +4,7 @@ namespace App\DAO;
 
 use App\Db\DbConn;
 use App\Model\Fabricante;
+use PDO;
 
 class FabricanteDAO
 {
@@ -55,6 +56,32 @@ class FabricanteDAO
             return "Sucesso ao remover o fabricante";
         } catch (\PDOException $e) {
             if ($e->getCode() == 23000) throw new \Exception("O fabricante informada já esta vinculada a um produto, impossivel a remoção", 500);
+            throw new \Exception($e->getMessage(), 500);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage(), 404);
+        } finally {
+            $conn = null;
+        }
+    }
+
+    public function getFabricante($idFabricante)
+    {
+        try {
+            $coon = DbConn::coon();
+
+            $sql = "SELECT nomeFantasia, cidade, estado, pais, cnpj 
+                    FROM fabricante
+                    WHERE idFabricante = :idFabricante";
+
+            $stmt = $coon->prepare($sql);
+            $stmt->bindParam(':idFabricante', $idFabricante);
+
+            $stmt->execute();
+
+            if ($stmt->rowCount() == 0) throw new \Exception("Não foi possivel encontrar o fabricante");
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
             throw new \Exception($e->getMessage(), 500);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), 404);
