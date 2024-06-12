@@ -7,7 +7,6 @@ use App\DAO\ProductDAO;
 use App\Http\Request;
 use App\Http\RequestValidateProductController;
 use App\Http\Response;
-use App\Model\Product;
 
 require_once __DIR__ . "/../Utils/functionContrucaoModelProduct.php";
 require_once __DIR__ . "/../Utils/functionRetornarDadosApiProducts.php";
@@ -128,7 +127,7 @@ class ProductController
             Response::responseMessage([
                 "sucess" => true,
                 "failed" => false,
-                "data" => $respostaAoUsuario
+                "produtos" => $respostaAoUsuario
             ], 200);
         } catch (\Exception $e) {
             Response::responseMessage([

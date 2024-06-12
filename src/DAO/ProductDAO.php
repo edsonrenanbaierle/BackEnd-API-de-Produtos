@@ -137,10 +137,9 @@ class ProductDAO
         try {
             $coon = DbConn::coon();
 
-            $sql = "SELECT p.idProduto, p.titulo, p.descricao, p.preco, p.estoque, p.pathImagem, c.nameCategoria, f.nomeFantasia, f.cnpj
+            $sql = "SELECT p.idProduto, p.titulo, p.descricao, p.preco, p.estoque, p.pathImagem, c.nameCategoria
                     FROM produto p 
-                    INNER JOIN categoria c ON c.idCategoria = p.idCategoria
-                    INNER JOIN fabricante f ON f.idFabricante = p.idFabricante";
+                    INNER JOIN categoria c ON c.idCategoria = p.idCategoria";
 
             $stmt = $coon->prepare($sql);
             $stmt->execute();
