@@ -19,7 +19,7 @@ CREATE TABLE produto (
     titulo VARCHAR(255) NOT NULL,
     descricao TEXT,
     preco INT NOT NULL,
-    estoque INT,
+    estoque INT NOT NULL,
     pathImagem VARCHAR(255),
     idCategoria INT NOT NULL,
     idFabricante INT NOT NULL,
