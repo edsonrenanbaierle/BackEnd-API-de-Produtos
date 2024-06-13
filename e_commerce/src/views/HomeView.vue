@@ -4,7 +4,7 @@
       <v-container>
         <h1 id="title">Produtos</h1>
         <v-row>
-          <v-col v-for="(produto, index) in produtos" :key="index"  cols="12" sm="6" md="4" lg="3" xl="2">
+          <v-col v-col v-for="(produto, index) in produtos" :key="index"  cols="12" sm="6" md="4" lg="3" xl="2">
             <v-card
               id="card"
               class="mx-auto"
@@ -21,6 +21,10 @@
                 {{ produto.titulo }}
               </v-card-title>
 
+              <v-card-text style="text-align: center;">
+                {{ produto.nameCategoria }}
+              </v-card-text>
+
               <v-card-actions>
                 <v-dialog width="300px">
                   <template #activator="{ props }">
@@ -31,11 +35,9 @@
                       class="mt-4"
                       v-bind="props"
                     >
-                      Detalhes
+                     R$ {{produto.preco}}
                     </v-btn>
                   </template>
-                  <!-- componente -->
-                  <Modalpoke :produto="produto" :index="produto.idProduto" />
                 </v-dialog>
               </v-card-actions>
             </v-card>
@@ -46,36 +48,31 @@
   </v-app>
 </template>
 
+<script setup>
+import { ref, onMounted } from 'vue';
 
-<script>
-import Modalpoke from '@/components/Modalpoke.vue';
-export default {
-  name: 'Home',
-  data: () => ({
-    produtos: []
-  }),
-  methods: {
-    async fetchProdutos() {
-      try {
-        const response = await fetch('http://localhost:8080/listAllProduct');
-        const data = await response.json();
-        if (data.sucess) {
-          this.produtos = data.data;
-        } else {
-          console.error('Erro ao buscar os produtos:', data.error);
-        }
-      } catch (error) {
-        console.error('Erro ao buscar os produtos:', error);
-      }
+const produtos = ref([]);
+
+const fetchProdutos = async () => {
+  try {
+    const response = await fetch('http://localhost:8080/listAllProduct');
+    const data = await response.json();
+    console.log(data)
+    if (data.sucess) {
+      produtos.value = data.produtos;
+    } else {
+      console.error('Erro ao buscar os produtos:', data.error);
     }
-  },
-  mounted() {
-    this.fetchProdutos();
-  },
-  components: {
-    Modalpoke
+  } catch (error) {
+    console.error('Erro ao buscar os produtos:', error);
   }
-}
+};
+
+onMounted(() => {
+  fetchProdutos();
+});
+
+
 </script>
 
 <style scoped>
@@ -87,4 +84,5 @@ export default {
   #card{
     border: 2px solid #121212;
   }
+
 </style>

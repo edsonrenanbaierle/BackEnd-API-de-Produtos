@@ -2,9 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Response;
-use Exception;
-
 class Request
 {
 

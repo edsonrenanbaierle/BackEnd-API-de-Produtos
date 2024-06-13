@@ -1,5 +1,5 @@
 {
-  "name": "projeto_poke_api",
+  "name": "e_commerce",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,11 +10,10 @@
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
-    "vuetify": "^3.4.10",
+    "vuetify": "^3.6.9",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
-    "@mdi/font": "^7.4.47",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.0",

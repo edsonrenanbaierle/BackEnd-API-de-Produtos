@@ -148,6 +148,9 @@ class ProductDAO
 
             if ($stmt->rowCount() == 0) throw new Exception("Nenhum produto cadastrado!");
 
+            for ($i=0; $i < count($result); $i++) { 
+                $result[$i]["preco"] =  number_format($result[$i]["preco"] / 100, 2, ',', '.');;
+            }
             return $result;
         } catch (\PDOException $e) {
             throw new Exception($e->getMessage(), 500);
